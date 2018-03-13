@@ -1,0 +1,23 @@
+<ul class="nav nav-tabs" id="navTabs">
+    <li><a href="<c:url value="/"></c:url>">Dashboard</a></li>
+    <li><a href="<c:url value="/interventions"></c:url>">Interwencje</a></li>
+    <li><a href="<c:url value="/adoptions"></c:url>">Adopcje</a></li>
+    <sec:authorize access="hasRole('O_VOLUNTEER')">
+    </sec:authorize>
+    <sec:authorize access="hasRole('INSPECTOR')">
+        <li><a href="<c:url value="/contacts"></c:url>">Kontakty</a></li>
+    </sec:authorize>
+    <sec:authorize access="hasRole('ADMIN')">
+    </sec:authorize>
+    <li><a href="<c:url value="/logout"></c:url>">Wyloguj</a></li>
+   <form role="form">
+        <div class="form-group" style="min-width: 100px; width : 20% ; margin-top: 10px; margin-left: 80%">
+            <sec:authentication property="principal.inspectorates" var="inspectorates"/>
+            <select class="form-control" type="text" id="inspectorates" name="inspectorate" onchange="this.form.submit()" >
+                <c:forEach var="inspectorate" items="${inspectorates}">
+                    <option value="${inspectorate}">${inspectorate.fullName}</option>
+                </c:forEach>
+            </select>
+        </div>
+    </form>
+</ul>
